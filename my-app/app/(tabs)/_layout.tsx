@@ -1,5 +1,4 @@
-// app/(tabs)/_layout.tsx or app/_layout.tsx depending on your setup
-import { Tabs } from 'expo-router';
+ import { Tabs } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';

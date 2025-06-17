@@ -1,15 +1,17 @@
-import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Feather, Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function Header({ title, options }: any) {
+  const router = useRouter()
   return (
  
       <View className="flex-row justify-between items-center space-y-4 bg-white pt-20 mb-4 px-5">
         <Text className="text-2xl font-bold text-green-700">{title}</Text>
         {options && (
           <View className="flex-row gap-5 space-x-5">
-            <TouchableOpacity onPress={() => console.log('Create tapped')}>
+            <TouchableOpacity onPress={() => router.push({ pathname: '/components/form' })}>
               <Ionicons size={24} name="create-outline" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => console.log('More tapped')}>
