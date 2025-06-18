@@ -1,14 +1,14 @@
 import { API_ENDPOINT } from "./ApiEndPoint";
 
 export const ApiPostRequest = {
-  addUserData: async ({ userName, phoneNo }) => {
+  addUserData: async ({   phoneNo,emailId }) => {
     try {
-      const response = await fetch(`${API_ENDPOINT.corePath}user`, {
+      const response = await fetch(`${API_ENDPOINT.corePath}users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userName, phoneNo }),
+        body: JSON.stringify({  phoneNo,emailId }),
       });
 
       if (!response.ok) {
@@ -21,4 +21,25 @@ export const ApiPostRequest = {
       return null;
     }
   },
+  addPostData: async ({ title, description, userId }) => {
+    try {
+      const response = await fetch(`${API_ENDPOINT.corePath}notes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, description, userId }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add note");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.log("Error adding note:", error);
+      return null;
+    }
+  }
+
 };
