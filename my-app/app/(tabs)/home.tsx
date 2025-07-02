@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/app/components/header';
 import { CardItem } from '../types';
 import Clock from '@/app/components/Clock'
-import { ApiGetRequest } from '@/data/services/ApiGetRequest'; // <-- Add this import (adjust the path if needed)
+import { ApiGetRequest } from '@/data/services/ApiGetRequest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import {useDispatch} from 'react-redux';
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState<boolean>(true); // 👈 Add loading state
+  const router= useRouter()
 
 
   const handleFetchUser = async () => {
@@ -25,11 +28,9 @@ export default function Home() {
       const userString = JSON.parse(user);
       const userId = userString?._id;
 
-      // 👇 response is likely already parsed JSON
-      const result = await ApiGetRequest.getAllNotesPerId({ userId });
+       const result = await ApiGetRequest.getAllNotesPerId({ userId });
 
-      // ✅ Use result directly
-      if (!Array.isArray(result.data)) {
+       if (!Array.isArray(result.data)) {
         console.error("Invalid API response format:", result);
         setLoading(false);
         return;
@@ -37,6 +38,7 @@ export default function Home() {
 
       const formattedData = result.data.map((item: any) => ({
         id: item._id,
+        userId: item.userId,
         title: item.title,
         description: item.description,
         createdAt: new Date(item.createdAt),
@@ -64,7 +66,13 @@ export default function Home() {
 
         <View className='flex-col'>
           <Text className="text-gray-600 mt-2">{item.description.length ? item.description.substring(0, 50) + "..." : item.description}</Text>
-          <TouchableOpacity className="mt-4 px-4 py-2 bg-blue-600 rounded w-full">
+          <TouchableOpacity
+            className="mt-4 px-4 py-2 bg-blue-600 rounded w-full"
+            onPress={() => {
+              // dispatch(setActiveNote(item)); // Uncomment and fix this line if setActiveNote is defined
+              router.push({ pathname: '/components/PostPage', params: { id: item.id } });
+            }}
+          >
             <Text className="text-white text-center">Learn More</Text>
           </TouchableOpacity>
         </View>

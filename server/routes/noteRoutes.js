@@ -47,6 +47,75 @@ router.get('/:userId', async (req, res) => {
     console.error("Failed to fetch notes:", error);
     return res.status(500).json({ message: "Server error: " + error.message });
   }
+  
 });
+
+router.get("/note/:noteId", async (req, res) => {
+  const { noteId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(noteId)) {
+    return res.status(400).json({ message: "Invalid note ID" });
+  }
+
+  try {
+    const note = await noteModel.findById(noteId);
+  if (!note) {
+    return res.status(404).json({ message: "Note not found" });
+  }
+        return res.status(200).json({ data: note });
+
+  } catch (error) {
+        console.error("Failed to fetch note:", error);
+  }
+
+});
+
+
+// routes/notes.js  (example file name)
+
+router.get("/note/:noteId", async (req, res) => {
+  const { noteId } = req.params;
+
+  // 1️⃣ Validate the Mongo ObjectId
+  if (!mongoose.Types.ObjectId.isValid(noteId)) {
+    return res.status(400).json({ message: "Invalid note ID" });
+  }
+
+  try {
+    // 2️⃣ Find the note
+    const note = await noteModel.findById(noteId);
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    // 3️⃣ Success response
+    return res.status(200).json({ data: note });
+  } catch (error) {
+    console.error("Failed to fetch note:", error);
+
+    // 4️⃣ Server‑side error
+    return res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.put("/note/:noteId", async(req,res)=>{
+  const {noteId} = req.params;
+  const { title, description, userId } = req.body;
+  try {
+    const note = await noteModel.findByIdAndUpdate(noteId,
+      {title, description},
+      {new: true}
+    )
+     if (!note) {
+    return res.status(404).json({ message: "Note was not update" });
+  }
+    return res.status(200).json({ data: note });
+
+  } catch (error) {
+      console.error("Failed to update notes:", error);
+    return res.status(500).json({ message: "Server error: " + error.message });
+  }  
+})
 
 export default router;
