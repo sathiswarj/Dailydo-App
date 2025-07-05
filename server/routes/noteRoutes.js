@@ -1,7 +1,7 @@
 import noteModel from '../model/noteModel.js';
 import express from 'express';
 import mongoose from 'mongoose';
-
+import { verifyToken } from '../middleware/verifytoken.js';
 const router = express.Router();
 
 // POST: Create a new note
@@ -28,7 +28,8 @@ router.get('/all', async (req, res) => {
 
 // GET: Fetch notes by userId (assuming schema supports participants)
 
-router.get('/:userId', async (req, res) => {
+
+router.get('/:userId', verifyToken, async (req, res) => {
   const { userId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -47,28 +48,27 @@ router.get('/:userId', async (req, res) => {
     console.error("Failed to fetch notes:", error);
     return res.status(500).json({ message: "Server error: " + error.message });
   }
-  
 });
 
-router.get("/note/:noteId", async (req, res) => {
-  const { noteId } = req.params;
+// router.get("/note/:noteId", async (req, res) => {
+//   const { noteId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(noteId)) {
-    return res.status(400).json({ message: "Invalid note ID" });
-  }
+//   if (!mongoose.Types.ObjectId.isValid(noteId)) {
+//     return res.status(400).json({ message: "Invalid note ID" });
+//   }
 
-  try {
-    const note = await noteModel.findById(noteId);
-  if (!note) {
-    return res.status(404).json({ message: "Note not found" });
-  }
-        return res.status(200).json({ data: note });
+//   try {
+//     const note = await noteModel.findById(noteId);
+//   if (!note) {
+//     return res.status(404).json({ message: "Note not found" });
+//   }
+//         return res.status(200).json({ data: note });
 
-  } catch (error) {
-        console.error("Failed to fetch note:", error);
-  }
+//   } catch (error) {
+//         console.error("Failed to fetch note:", error);
+//   }
 
-});
+// });
 
 
 // routes/notes.js  (example file name)

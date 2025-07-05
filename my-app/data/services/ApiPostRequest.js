@@ -1,14 +1,14 @@
 import { API_ENDPOINT } from "./ApiEndPoint";
 
 export const ApiPostRequest = {
-  addUserData: async ({ phoneNo, emailId }) => {
+  addUserData: async ({ password, email, name }) => {
     try {
       const response = await fetch(`${API_ENDPOINT.corePath}users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ phoneNo, emailId }),
+        body: JSON.stringify({ password, email, name }),
       });
 
       if (!response.ok) {
@@ -21,6 +21,28 @@ export const ApiPostRequest = {
       return null;
     }
   },
+
+    login: async ({ password, email }) => {
+    try {
+      const response = await fetch(`${API_ENDPOINT.corePath}users/login`, {
+        method: "POST",
+        headers: {
+           "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password, email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add user");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.log("Error adding user:", error);
+      return null;
+    }
+  },
+
   addPostData: async ({ title, description, userId }) => {
     try {
       const response = await fetch(`${API_ENDPOINT.corePath}notes`, {
