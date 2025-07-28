@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { ApiPostRequest } from '@/data/services/ApiPostRequest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { saveUser } from '@/utils/storage';
 
 export default function Login() {
     const [name, setName] = useState("");
@@ -20,13 +21,12 @@ export default function Login() {
         try {
             const response = await ApiPostRequest.addUserData({ name, password, email });
 
-            if (response && response._id) {
-                await AsyncStorage.setItem('users', JSON.stringify(response));
-                router.push('/home');
-            } else {
-                setError('No user found with the provided credentials.');
-            }
-
+            if (response?.token && response?.user) {
+  await saveUser({ ...response.user, token: response.token });  
+  router.push('/home');
+} else {
+  setError('Something went wrong during registration.');
+}
         } catch (err) {
             console.log('Login error:', err);
             setError('Something went wrong. Please try again.');

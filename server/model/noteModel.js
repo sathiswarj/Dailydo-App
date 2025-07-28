@@ -12,8 +12,20 @@ const noteSchema = new mongoose.Schema({
   },
   description: {
     type: String
-  }
+  },
+  time:{
+    type: Date,
+  },
+   priority:{
+    type: String,
+    enum: ["Low", "Medium", "High"],
+  },
+   status:{
+    type: String,
+    enum: ["Pending", "In Progress", "Completed"],
+  },
+
 }, { timestamps: true });
 
-const Note = mongoose.model("Post", noteSchema);
+const Note = mongoose.model("Note", noteSchema);
 export default Note;
