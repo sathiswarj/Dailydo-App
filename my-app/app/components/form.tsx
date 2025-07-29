@@ -13,8 +13,8 @@ import {
 import { getUser } from '@/utils/storage';
 
 export default function NoteForm() {
-  const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [title, setTitle] =  useState('');
+  const [description, setDescription] = useState('');
   const [time, setTime] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
   const [selectedPriorityValue, setSelectedPriorityValue] = useState("Low");
@@ -58,9 +58,9 @@ export default function NoteForm() {
   return (
     <>
       <HeaderAction title={"Notes"} />
-      <View className="w-full space-y-4 gap-4 px-6 py-4">
+      <View className="w-full space-y-4 gap-4 px-6 py-4 flex flex-1 justify-center bg-white">
         <TextInput
-          className="w-full h-12 border border-gray-300 rounded-full px-4 text-gray-800 placeholder-gray-400 text-center"
+          className="w-full h-12 border border-gray-300 rounded-full px-4 py-2 text-gray-800 placeholder-gray-400 "
           placeholder="Enter your task here"
           placeholderTextColor="#A0AEC0"
           value={title}
@@ -94,29 +94,32 @@ export default function NoteForm() {
             onChange={handleTimeChange}
           />
         )}
-        <View className="w-full h-12 border border-black rounded-full justify-center">
-          <Picker
-            selectedValue={selectedPriorityValue}
-            onValueChange={(itemValue) => setSelectedPriorityValue(itemValue)}
-            style={{ height: 55, width: '100%' }}
-          >
-            <Picker.Item label="Low" value="Low" />
-            <Picker.Item label="Medium" value="Medium" />
-            <Picker.Item label="High" value="High" />
-          </Picker>
-        </View>
+        <View className='flex-row items-center justify-between mt-4 w-[75%]'>
+   <View className="w-[48%] h-12 border border-black rounded-full justify-center">
+    <Picker
+      selectedValue={selectedPriorityValue}
+      onValueChange={(itemValue) => setSelectedPriorityValue(itemValue)}
+      style={{ height: 48, width: '100%' }}
+    >
+      <Picker.Item label="Low" value="Low" />
+      <Picker.Item label="Medium" value="Medium" />
+      <Picker.Item label="High" value="High" />
+    </Picker>
+  </View>
 
-        <View className="w-full h-12 border border-black rounded-full justify-center">
-          <Picker
-            selectedValue={selectedStatusValue}
-            onValueChange={(itemValue) => setSelectedStatusValue(itemValue)}
-            style={{ height: 55, width: '100%' }}
-          >
-            <Picker.Item label="Pending" value="Pending" />
-            <Picker.Item label="In Progress" value="In Progress" />
-            <Picker.Item label="Completed" value="Completed" />
-          </Picker>
-        </View>
+   <View className="w-[48%] h-12 border border-black rounded-full justify-center">
+    <Picker
+      selectedValue={selectedStatusValue}
+      onValueChange={(itemValue) => setSelectedStatusValue(itemValue)}
+      style={{ height: 48, width: '100%' }}
+    >
+      <Picker.Item label="Pending" value="Pending" />
+      <Picker.Item label="In Progress" value="In Progress" />
+      <Picker.Item label="Completed" value="Completed" />
+    </Picker>
+  </View>
+</View>
+
         <Pressable
           onPress={handleAdd}
           className="w-full h-12 bg-green-600 rounded-full justify-center items-center"

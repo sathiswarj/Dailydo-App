@@ -93,7 +93,7 @@ addPostData: async ({ title, description, time, priority, status }) => {
   }
 },
   /** Update an existing note */
-  updatePostData: async ({ noteId, title, description }) => {
+  updatePostData: async ({ noteId,  title, description, time, priority, status }) => {
     const user = await getUser();
     const token = user?.token;
 
@@ -109,7 +109,7 @@ addPostData: async ({ title, description, time, priority, status }) => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify({  title, description, time, priority, status }),
       });
 
       const data = await response.json();

@@ -1,11 +1,8 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/redux/store' // Adjust path as necessary
 
 export default function Account() {
-  const user = useSelector((state: RootState) => state.user)
-  console.log('User data:', user)
 
   return (
     <View className="flex-1 items-center justify-center bg-white">
@@ -16,11 +13,9 @@ export default function Account() {
           resizeMode="cover"
         />
         <Text className="text-2xl font-bold mt-4">
-          {user.name || 'John Doe'}
-        </Text>
+          John Doe          </Text>
         <Text className="text-gray-500">
-          {user.email || 'johndoe@gmail.com'}
-        </Text>
+          johndoe@gmail.com        </Text>
       </View>
     </View>
   )

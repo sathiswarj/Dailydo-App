@@ -1,10 +1,21 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, Linking, TouchableOpacity } from 'react-native';
 
-export default function help() {
+const help = () => {
   return (
-    <View>
-      <Text>help</Text>
+    <View className="flex-1 p-4 bg-white">
+      <Text className="text-xl font-bold mb-4">🆘 Help & Support</Text>
+
+      <Text className="text-base mb-2">Reach out via email at</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('mailto:support@yourapp.com')}>
+        <Text className="text-blue-600 underline mb-4">support@yourapp.com</Text>
+      </TouchableOpacity>
+
+      <Text className="text-base mb-2">Visit our FAQ or Documentation at</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://yourapp.com/help')}>
+        <Text className="text-blue-600 underline">yourapp.com/help</Text>
+      </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
+
+export default help;
