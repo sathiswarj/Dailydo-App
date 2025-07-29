@@ -90,13 +90,13 @@ export default function Home() {
 
     return (
       <View className="m-2 bg-white rounded-2xl shadow-md overflow-hidden mx-1 w-full">
-        <View className="p-6">
-          <View className='flex-row justify-between items-center'>
-            <View className='flex-row items-center space-x-3'>
+        <View className="p-6 space-y-4">
+          <View className='flex-row justify-between items-center '>
+            <View className='flex-col  space-y-4'>
               <Text className="text-lg font-semibold">{item.title}</Text>
-              <View className={`px-2 py-1 rounded ${bgColor}`}>
-                <Text className={`${textColor} text-sm`}>{item.status}</Text>
-              </View>
+            
+                <Text className={`${textColor} text-sm items-center`}>⦿ {item.status}</Text>
+           
             </View>
             <View className='flex-row items-center space-x-2'>
               <Text className="text-gray-500 text-sm">{item.createdAt.toLocaleDateString()}</Text>
