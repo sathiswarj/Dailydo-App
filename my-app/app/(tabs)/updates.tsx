@@ -2,7 +2,7 @@ import { View, Text, ScrollView } from 'react-native';
 
 const Updates = () => {
   return (
-    <ScrollView className="p-4">
+    <ScrollView className="px-6 mt-20">
       <Text className="text-xl font-bold mb-4">🚀 What's New</Text>
 
       <View className="mb-4">

@@ -94,12 +94,12 @@ export default function NoteForm() {
             onChange={handleTimeChange}
           />
         )}
-        <View className='flex-row items-center justify-between mt-4 w-[75%]'>
+        <View className='flex-row items-center justify-between mt-4 w-full'>
    <View className="w-[48%] h-12 border border-black rounded-full justify-center">
     <Picker
       selectedValue={selectedPriorityValue}
       onValueChange={(itemValue) => setSelectedPriorityValue(itemValue)}
-      style={{ height: 48, width: '100%' }}
+      style={{ height: 50, width: '100%' }}
     >
       <Picker.Item label="Low" value="Low" />
       <Picker.Item label="Medium" value="Medium" />
@@ -111,7 +111,7 @@ export default function NoteForm() {
     <Picker
       selectedValue={selectedStatusValue}
       onValueChange={(itemValue) => setSelectedStatusValue(itemValue)}
-      style={{ height: 48, width: '100%' }}
+      style={{ height: 50, width: '100%' }}
     >
       <Picker.Item label="Pending" value="Pending" />
       <Picker.Item label="In Progress" value="In Progress" />

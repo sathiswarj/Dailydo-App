@@ -6,7 +6,7 @@ const USER_KEY = 'users';
 export const saveToStorage = async (key: string, value: any) => {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));
-    console.log(`✅ Saved [${key}] to AsyncStorage`, value);
+    // console.log(`✅ Saved [${key}] to AsyncStorage`, value);
   } catch (error) {
     console.log(`❌ Error saving [${key}] to AsyncStorage`, error);
   }
@@ -15,7 +15,7 @@ export const saveToStorage = async (key: string, value: any) => {
 export const getFromStorage = async (key: string) => {
   try {
     const value = await AsyncStorage.getItem(key);
-          console.log(`✅ Retrieved [${key}] from AsyncStorage`, value);    
+          // console.log(`✅ Retrieved [${key}] from AsyncStorage`, value);    
 
     if (value) {
       return JSON.parse(value);

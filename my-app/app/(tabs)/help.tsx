@@ -2,8 +2,8 @@ import { View, Text, Linking, TouchableOpacity } from 'react-native';
 
 const help = () => {
   return (
-    <View className="flex-1 p-4 bg-white">
-      <Text className="text-xl font-bold mb-4">🆘 Help & Support</Text>
+    <View className="flex-1 px-6 mt-20">
+      <Text className="text-xl font-bold mb-4"> Help & Support</Text>
 
       <Text className="text-base mb-2">Reach out via email at</Text>
       <TouchableOpacity onPress={() => Linking.openURL('mailto:support@yourapp.com')}>

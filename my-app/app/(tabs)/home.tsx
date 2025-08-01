@@ -117,7 +117,7 @@ export default function Home() {
               router.push({ pathname: '/components/PostPage', params: { id: item.id } });
             }}
           >
-            <Text className="text-white text-center">Learn More</Text>
+            <Text className="text-white text-center">Edit Note</Text>
           </TouchableOpacity>
         </View>
       </View>
